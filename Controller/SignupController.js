@@ -3,6 +3,20 @@ const bcrypt = require('bcryptjs');
 const md5 = require('md5');
 const express =require('express');
 const app = express();
+const mailer = require('express-mailer');
+
+
+mailer.extend(app, {
+    from: 'ankitdubeymail1@gmail.com',
+    host: 'smtp.gmail.com', // hostname
+    secureConnection: true, // use SSL
+    port: 465, // port for secure SMTP
+    transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+    auth: {
+        user: 'ankitdubeymail1@gmail.com',
+        pass: 'mail@#$555'
+    }
+});
 
 
 const Users = require('../models/Users');
@@ -85,11 +99,20 @@ module.exports.Signup = (req, res)=>{
                                     const name = newUser.fullname;
                                     const token = User.verification_token;
                                     // const link1="http://localhost:3006/auth/"+token
-                                    const message=`<p>
-                                            <p>Hello Mr. ${name} </p>
-                                            <a href="http://ankit-intern.hestalabs.com/"+${token} >Click here to activate account</a>
-                                        </p>`;
-                                    sendMail( emailid, "Verification mail from Hestagram", message)
+                                    app.mailer.send('email.ejs', {
+                                        to: emailid, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                        subject: 'Verification email from hestagram', // REQUIRED.
+                                        name:name,
+                                        token:token
+
+                                    }, function (err) {
+                                        if (err) {
+                                            // handle error
+                                            console.log(err);
+
+                                        }
+                                        console.log('email sent')
+                                    });
 
                                     const data={
                                         status:true,
