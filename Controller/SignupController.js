@@ -7,14 +7,14 @@ const mailer = require('express-mailer');
 
 
 mailer.extend(app, {
-    from: 'ankitdubeymail1@gmail.com',
+    from: 'ankitdubeymail@gmail.com',
     host: 'smtp.gmail.com', // hostname
     secureConnection: true, // use SSL
     port: 465, // port for secure SMTP
     transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
     auth: {
-        user: 'ankitdubeymail1@gmail.com',
-        pass: 'mail@#$555'
+        user: 'ankitdubeymail@gmail.com',
+        pass: 'a@n@k@t@123'
     }
 });
 
@@ -23,9 +23,9 @@ const Users = require('../models/Users');
 let user_detail = require('../models/User_details')
 let follow = require('../models/followers');
 
-require('../config/Mail');
+// require('../config/Mail');
 require('../config/dbconfig');
-require('../config/ExpressMailer');
+// require('../config/ExpressMailer');
 
 
 
@@ -100,7 +100,7 @@ module.exports.Signup = (req, res)=>{
                                     const token = User.verification_token;
                                     // const link1="http://localhost:3006/auth/"+token
                                     app.mailer.send('email.ejs', {
-                                        to: emailid, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                        to: emailid,
                                         subject: 'Verification email from hestagram', // REQUIRED.
                                         name:name,
                                         token:token
