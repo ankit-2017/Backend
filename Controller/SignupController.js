@@ -6,24 +6,24 @@ const app = express();
 const mailer = require('express-mailer');
 
 
-mailer.extend(app, {
-    from: 'ankitdubeymail@gmail.com',
-    host: 'smtp.gmail.com', // hostname
-    secureConnection: true, // use SSL
-    port: 465, // port for secure SMTP
-    transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
-    auth: {
-        user: 'ankitdubeymail@gmail.com',
-        pass: 'a@n@k@t@123'
-    }
-});
+// mailer.extend(app, {
+//     from: 'ankitdubeymail@gmail.com',
+//     host: 'smtp.gmail.com', // hostname
+//     secureConnection: true, // use SSL
+//     port: 465, // port for secure SMTP
+//     transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+//     auth: {
+//         user: 'ankitdubeymail@gmail.com',
+//         pass: 'a@n@k@t@123'
+//     }
+// });
 
 
 const Users = require('../models/Users');
 let user_detail = require('../models/User_details')
 let follow = require('../models/followers');
 
-// require('../config/Mail');
+require('../config/Mail');
 require('../config/dbconfig');
 // require('../config/ExpressMailer');
 
@@ -98,21 +98,29 @@ module.exports.Signup = (req, res)=>{
                                     const emailid = newUser.Email;
                                     const name = newUser.fullname;
                                     const token = User.verification_token;
-                                    // const link1="http://localhost:3006/auth/"+token
-                                    app.mailer.send('email.ejs', {
-                                        to: emailid,
-                                        subject: 'Verification email from hestagram', // REQUIRED.
-                                        name:name,
-                                        token:token
+                                    const link1 = "http://ankit-intern.hestalabs.com/auth/"+token
+                                    const message=`<div>
+                                                    <p>hello mr. ${name}</p>
+                                                    <a href=${link1}>Click here to activate account</a>
+                                                </div>`
+                                    sendMail(emailid, "Account verification from Hestagram", message )
+                
+                                    // app.mailer.send('email.ejs', {
+                                    //     to: emailid,
+                                    //     subject: 'Verification email from hestagram', // REQUIRED.
+                                    //     name:name,
+                                    //     token:token
 
-                                    }, function (err) {
-                                        if (err) {
-                                            // handle error
-                                            console.log(err);
+                                    // }, function (err) {
+                                    //     if (err) {
+                                    //         // handle error
+                                    //         console.log(err);
 
-                                        }
-                                        console.log('email sent')
-                                    });
+                                    //     }
+                                    //     console.log('email sent')
+                                    // });
+
+                                    
 
                                     const data={
                                         status:true,

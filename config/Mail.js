@@ -3,18 +3,18 @@ const nodemailer = require('nodemailer');
  sendMail=(to,subject,message)=>
 {
     const smtpConfig = {
-        service: 'Gmail',
+        service: 'SMTP',
         auth: {
-            user: 'ankitdubeymail@gmail.com',
-            pass: 'a@n@k@t@123'
+            user: 'ankitdubeymail1@gmail.con',
+            pass: 'mail@#555'
         }
     };
     const transporter = nodemailer.createTransport(smtpConfig);
     const mailOptions = {
-        from: '"Hestagram" <ankitdubeymail1@gmail.com>', // sender address
+        from: '"Hestagram" <ankitdubeymail1@gmail.con>', // sender address
         to: to, // list of receivers
         subject: subject, // Subject line
-        text: 'Verification mail from Hestagram', // plaintext body
+        text: 'Account verification mail from Hestagram', // plaintext body
         html: message // html body
     };
 

@@ -27,7 +27,7 @@ module.exports.Forgot = (req, res) =>{
                                     const emailId = data.Email
                                     const newToken= token.verification_token
                                     const name = data.fullname;
-                                    const link1 = "http://localhost:3006/passwordReset/" + newToken
+                                    const link1 = "http://ankit-intern.hestalabs.com/passwordReset/" + newToken
                                     const message = '<p>' + '<h3>hello Mr. ' + name + '</h3>' +
                                         '<h3>This is password reset link from Hestagram</h3>' +
                                         '<a href=' + link1 + '>Click here to reset password</a>' +
