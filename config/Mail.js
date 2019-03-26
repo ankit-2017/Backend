@@ -5,13 +5,13 @@ const nodemailer = require('nodemailer');
     const smtpConfig = {
         service: 'SMTP',
         auth: {
-            user: 'ankitdubeymail1@gmail.con',
-            pass: 'mail@#555'
+            user: 'example@domail.com',
+            pass: '*********'
         }
     };
     const transporter = nodemailer.createTransport(smtpConfig);
     const mailOptions = {
-        from: '"Hestagram" <ankitdubeymail1@gmail.con>', // sender address
+        from: '"Hestagram" <example@domain.com>', // sender address
         to: to, // list of receivers
         subject: subject, // Subject line
         text: 'Account verification mail from Hestagram', // plaintext body
